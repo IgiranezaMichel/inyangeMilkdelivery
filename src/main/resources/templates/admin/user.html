@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Inyange Admin</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    <!-- plugins:css -->
+    <!-- materials -->
+    <link rel="stylesheet" href="/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_sidebar.html -->
+      <!-- =======Sidebar navigation -->
+      <nav class="sidebar sidebar-offcanvas"  >
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+          <img class="img-xs rounded-circle no-print" th:src="@{'../assets/images/inyangelogo.png'}" alt="">
+        </div>
+        <div class="nav">
+          <li class="nav-item profile">
+            <div class="profile-desc">
+              <div class="profile-pic">
+                <div class="count-indicator">
+                  <img class="img-xs rounded-circle no-print" th:src="@{'../assets/images/inyangelogo.png'}" alt="">
+                  <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                  <h5 class="mb-0 font-weight-normal" th:text="${admin.name}">Username</h5>
+                  <span>Admin </span>
+                </div>
+              </div>
+              <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+              <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                <div class="dropdown-divider"></div>
+                <a th:href="@{'/admin/setting'}" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-onepassword  text-info"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a th:href="@{'/logout?logout'}" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-calendar-today text-success"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Logout</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <div class="nav-item menu-items">
+            <a class="nav-link" href="/admin">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </div>
+          <!--  -->
+          <div class="nav-item menu-items">
+            <a class="nav-link" href="/admin/milk">
+              <span class="menu-icon">
+                <i class="mdi mdi-cup"></i>
+              </span>
+              <span class="menu-title">Milk</span>
+            </a>
+          </div>
+          <div class="nav-item menu-items">
+            <a class="nav-link" href="/admin/distributor">
+              <span class="menu-icon">
+                <i class="mdi mdi-chart-bar"></i>
+              </span>
+              <span class="menu-title">Distributor</span>
+            </a>
+          </div>
+          <div class="nav-item menu-items">
+            <a class="nav-link" th:href="@{'/admin/order'}">
+              <span class="menu-icon">
+                <i class="mdi mdi-cart"></i>
+              </span>
+              <span class="menu-title">Order</span>
+            </a>
+          </div>
+          <div class="nav-item menu-items bg-dark">
+            <a class="nav-link" th:href="@{'/admin/user'}">
+              <span class="menu-icon">
+                <i class="mdi mdi-account"></i>
+              </span>
+              <span class="menu-title">User</span>
+            </a>
+          </div>
+          </li>
+          <div class="nav-item menu">
+            <a class="nav-link" th:href="@{'/admin/school'}">
+              <span class="menu-icon">
+                <i class="mdi mdi-home"></i>
+              </span>
+              <span class="menu-title">Schools</span>
+            </a>
+          </div>
+          <li class="nav-item menu-items">
+            <a class="nav-link"th:href="@{'/logout?logout'}">
+              <span class="menu-icon">
+                <i class="mdi mdi-file-document-box"></i>
+              </span>
+              <span class="menu-title">Logout</span>
+            </a>
+          </li>
+        </div >
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+            <ul class="navbar-nav w-100">
+              <li class="nav-item w-100">
+               Inyange
+              </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item dropdown d-none d-lg-block">
+                <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fa fa-user-circle text-light" aria-hidden="true"></i></a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-file-outline text-primary"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject ellipsis mb-1">Setting</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-web text-info"></i>   
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject ellipsis mb-1">Logout</p>
+                    </div>
+                  </a>
+                </div>
+              </li>
+           
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <!-- Order made status -->
+            <i class="mdi mdi-account-plus" data-bs-toggle="modal" data-bs-target="#modalId" style="font-size: xx-large;"></i>
+            <div class="alert alert-secondary alert-dismissible fade show" role="alert" th:if="${message.length!=0}">
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              <strong th:text="${message}">Alert Heading</strong>
+            </div>
+            
+            <script>
+              var alertList = document.querySelectorAll('.alert');
+              alertList.forEach(function (alert) {
+                new bootstrap.Alert(alert)
+              })
+            </script>
+            
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">System  Users</h4>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Name </th>
+                            <th>Email</th>
+                            <th> Phone Number</th>
+                            <th> Roles </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr th:each="user:${userList}">
+                            <td th:text="${user.name}"> 02312 </td>
+                            <td th:text="${user.email}"> $14,500 </td>
+                            <td th:text="${user.phoneNumber}"> Dashboard </td>
+                            <td >
+                              <div th:if="${user.role.equals('ROLE_DISTRIBUTOR')}">
+                                Distributor
+                              </div>
+                              <div th:if="${user.role.equals('ROLE_MINISTRY')}">
+                                Minister
+                              </div>
+                              <div th:if="${user.role.equals('ROLE_SCHOOL')}">
+                                Head teacher
+                              </div>
+                              <div th:if="${user.role.equals('ROLE_ADMIN')}">
+                                Inyange administrator
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Modal trigger button -->
+            <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Create Users Account</h5>
+                      <button type="button " class="border-0 bg-transparent text-light" data-bs-dismiss="modal" aria-label="Close">X</button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="/admin/user" method="post">
+                      <div class="mb-3">
+                        <label for="input1" class="form-label">Name</label>
+                        <input type="text" class="form-control" name="name">
+                      </div>
+                      <div class="mb-3">
+                        <label for="input1" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email">
+                      </div>
+                      <div class="mb-3">
+                        <label for="input1" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" name="phoneNumber">
+                      </div>
+                      <div class="mb-3">
+                        Add user Role
+                        <select class="form-select w-100 p-1 rounded" name="role">
+                          <option value="">--Select role--</option>
+                          <option value="ROLE_DISTRIBUTOR">Distributor</option>
+                          <option value="ROLE_MINISTRY">Minister</option>
+                          <option value="ROLE_ADMIN">System Admin</option>
+                        </select>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-light">Save User</button>
+                      </div>
+                    </form>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
+            <!-- end of order made status -->
+          </div>  
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="/assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="/assets/js/misc.js"></script>
+  </body>
+</html>

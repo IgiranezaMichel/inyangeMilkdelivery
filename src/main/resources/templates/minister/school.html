@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Inyange minister</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    <!-- plugins:css -->
+    <!-- materials -->
+    <link rel="stylesheet" href="/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_sidebar.html -->
+      <!-- =======Sidebar navigation -->
+      <nav class="sidebar sidebar-offcanvas"  >
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+            <img width="80" class="rounded-circle p-1" th:src="@{'../assets/images/inyangelogo.png'}" alt="">
+        </div>
+        <div class="nav">
+          <li class="nav-item profile">
+            <div class="profile-desc">
+              <div class="profile-pic">
+                <div class="count-indicator">
+                  <i class="mdi mdi-account"></i>
+                  <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                  <h5 class="mb-0 font-weight-normal" th:text="${minister.name}">Username</h5>
+                  <span>Minister </span>
+                </div>
+              </div>
+              <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+              <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                <a th:href="@{'/minister/setting'}" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-onepassword  text-info"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a th:href="@{'/logout?logout'}" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-calendar-today text-success"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Logout</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <div class="nav-item menu-items">
+            <a class="nav-link" href="/minister">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </div>
+          <!--  -->
+          <div class="nav-item menu-items">
+            <a class="nav-link" th:href="@{'/minister/order'}">
+              <span class="menu-icon">
+                <i class="mdi mdi-cart"></i>
+              </span>
+              <span class="menu-title">Order</span>
+            </a>
+          </div>
+          </li>
+          <div class="nav-item menu bg-dark     ">
+            <a class="nav-link" th:href="@{'/minister/school'}">
+              <span class="menu-icon">
+                <i class="mdi mdi-home"></i>
+              </span>
+              <span class="menu-title">Schools</span>
+            </a>
+          </div>
+          <li class="nav-item menu-items">
+            <a class="nav-link"th:href="@{'/logout?logout'}">
+              <span class="menu-icon">
+                <i class="mdi mdi-file-document-box"></i>
+              </span>
+              <span class="menu-title">Logout</span>
+            </a>
+          </li>
+        </div >
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+            <ul class="navbar-nav w-100">
+              <li class="nav-item w-100">
+               Inyange
+              </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item dropdown d-none d-lg-block">
+                <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fa fa-user-circle text-light" aria-hidden="true"></i></a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-file-outline text-primary"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject ellipsis mb-1">Setting</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-web text-info"></i>   
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject ellipsis mb-1">Logout</p>
+                    </div>
+                  </a>
+                </div>
+              </li>
+           
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+<!-- Revenues sales and purchases -->
+            <div class="row">
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Total Schools</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0" th:text="${schoolList.size()}"></h2>
+                        </div>
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-home text-primary ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>Total Order</h5>
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0" th:text="${orderList.size()}">$45850</h2>
+                        </div>    
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <!-- =====Revenues sales and purchases == -->
+            <!-- Order made status -->
+            <div class="row ">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">List of Head Teacher</h4>
+                    <i class="mdi mdi-plus-circle"data-bs-toggle="modal" data-bs-target="#modalId" style="font-size: xx-large;"></i>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>School name </th>
+                            <th>Location</th>
+                            <th> Number of student</th>
+                            <th> Head Teacher </th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr th:each="school:${schoolList}">
+                            <td >
+                                <i class="mdi mdi-home"></i><span class="pl-2" th:text="${school.name}">Henry Klein</span>
+                            </td>
+                            <td th:if="${school.locationId!=null}"> 
+                                <i class="mdi mdi-map-marker"></i><span th:text="${school.locationId.locationId.locationId.name}"></span>
+                                <b>/</b> <span th:text="${school.locationId.locationId.name}"></span>
+                                <b>/</b><span th:text="${school.locationId.name}"></span>
+                              </td>
+                            <td>
+                                <i class="mdi mdi-account-multiple"></i>  <span th:text="${school.studentNumber}"></span> students
+                            </td>
+                            <td> 
+                                <div th:if="${school.user!=null}">
+                                   <div>
+                                    <i class="mdi mdi-account"></i> <span th:text="${school.user.name}"></span>
+                                   </div> 
+                                   <div>
+                                    <i class="mdi mdi-phone"></i> <span th:text="${school.user.phoneNumber}"></span>
+                                   </div>
+                                   <div>
+                                    <i class="mdi mdi-email"></i> <span th:text="${school.user.email}"></span>
+                                   </div>
+                                </div>
+                             </td>
+                             <td>
+                                <button class="btn btn-transparent border-0 position-relative" >
+                                    <i onclick="getDetail(this)" th:id="${school.id}+'#'+${school.name}" class="mdi mdi-cart text-success mr-3" style="font-size: larger;" data-bs-toggle="modal" data-bs-target="#cart"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge
+                                     rounded-pill bg-primary" th:text="${school.orderList.size()}">
+                                    </span>
+                                </button>
+                             </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>  
+              </div>
+            </div>
+            <!-- Modal trigger button -->
+            <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Add Head of School</h5>
+                    <button type="button " class="border-0 bg-transparent text-light" data-bs-dismiss="modal" aria-label="Close">X</button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="" method="post">
+                        <div class="mb-3">
+                          <label for="" class="form-label">Name of Head Teacher</label>
+                          <input type="text"
+                            class="form-control" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Phone Number</label>
+                            <input type="text"
+                              class="form-control" name="phoneNumber" required>
+                          </div>
+                          <div class="mb-3">
+                            <label for="" class="form-label">Email</label>
+                            <input type="text"
+                              class="form-control" name="email" required>
+                          </div>
+                          <div class="mb-3">
+                            <label for="" class="form-label">School Name</label>
+                            <input type="text"
+                              class="form-control" name="schoolname" required>
+                          </div>
+                          <div class="mb-3">
+                            <label for="" class="form-label">Student Number</label>
+                            <input type="number" required
+                              class="form-control" name="studentNumber">
+                          </div>
+                          <div class="mb-3">
+                              <label for="" class="form-label">Province</label>
+                              <div class="mb-3">
+                                <select onchange="getDetails('province')" class="form-select form-select-lg w-100"  id="provinceid" required>
+                                  <option value="">--select province--</option>
+                                  <option th:each="province:${province}" th:value="${province.id}" th:text="${province.name}">One</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                              <label for="" class="form-label">District</label>
+                              <select onchange="getDetails('district')"  class="form-select w-100 p-1" id="districtId" required>
+                                <option value="">--select District--</option>
+                                <option  id="district">One</option>
+                              </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Sector</label>
+                                <select   class="form-select w-100 p-1" name="location" id="sectorid" required>
+                                    <option value="">--select Sector--</option>
+                                    <option  id="sector">One</option>
+                                  </select>
+                              </div>
+                          <div class="modal-footer">
+                              <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                          </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+            <div class="modal fade" id="cart" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalTitleId">Order Milk</h5>
+                      <button type="button " class="border-0 bg-transparent text-light" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="/minister/order/add" method="post">
+                        <div class="mb-3">
+                            <input type="hidden" name="school" id="school">
+                            <div>
+                                <i class="mdi mdi-home"></i> <span id="nameOfSchool"></span>
+                            </div>
+                            <div class="mb-3">
+                                Select Milk
+                              <select name="milk" class="form-select w-100 border p-2 rounded">
+                                <option value="">--Select </option>
+                                <option th:each="milk:${milkList}" th:value="${milk.id}" th:text="${milk.packageType}">One</option>
+                              </select>
+                            </div>
+                        </div>
+                          <div class="mb-3">
+                            <label for="" class="form-label">Quantity per child</label>
+                            <input type="number"
+                              class="form-control" name="quantity" required>
+                          </div>
+                          <div class="mb-3">
+                              <label for="" class="form-label">Deadline</label>
+                              <input type="date"
+                                class="form-control" name="deadLineDate" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                              </div>
+                            </form>
+                      </div>
+                  </div>
+                </div>
+              </div>
+          </div>  
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+
+  <script>
+    function getDetail(btn)
+    {
+        const data=btn.getAttribute("id").split('#');
+        document.getElementById('school').value=data[0];
+        document.getElementById('nameOfSchool').innerHTML=data[1];
+    }
+    function getDetails(btn)
+    {    const info=btn;
+        var data;
+        if(info=='province')
+        data=document.getElementById('provinceid').value;
+        else if(info=='district')
+        data=document.getElementById('districtId').value;
+        // alert('data1='+data);
+        var xhr = new XMLHttpRequest();
+        const url='/api/location/'+data;
+        xhr.onreadystatechange=()=>{
+      if(xhr.readyState==4){
+        if(xhr.status==200)
+        {
+          var responseData = JSON.parse(xhr.responseText);
+        //   alert(responseData);
+          var selectElement;
+          if(btn=='province')
+           selectElement = document.getElementById("districtId");
+          else if(btn=='district')
+          selectElement= document.getElementById("sectorid");
+          selectElement.innerHTML = "";
+        for (var i = 0; i < responseData.length; i++) {
+            var option = document.createElement("option");
+            option.value = responseData[i].id;  
+            option.text = responseData[i].name;    
+            selectElement.appendChild(option);
+        }
+        }
+        else alert(xhr.status);
+      }
+     }
+     xhr.open('GET',url,true);
+     xhr.send();
+     
+    }
+  </script>
+    <script src="/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="/assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="/assets/js/misc.js"></script>
+  </body>
+</html>
